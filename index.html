@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Seven Wonders of the Modern World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #111827;
+            color: #e5e7eb;
+        }
+        .hero-title {
+            font-family: 'Lora', serif;
+        }
+        
+        /* Hero Section Styling */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: white;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            transition: background-image 1s ease-in-out;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+        /* New Split-Screen Sticky Layout */
+        .wonder-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            align-items: start; /* Align items to the top */
+            padding: 5rem 2rem;
+        }
+
+        .wonder-section:nth-child(even) .image-pane {
+            order: 2; /* Alternate image position */
+        }
+
+        .image-pane {
+            position: sticky;
+            top: 5rem; /* Stick 5rem from the top */
+            height: 80vh;
+        }
+
+        .image-pane-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+        }
+
+        .image-pane-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .content-pane {
+            padding-top: 2rem;
+        }
+
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%;
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 0.5rem;
+        }
+
+        /* Accordion styles */
+        .details-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out;
+        }
+        .details-content.open {
+            max-height: 1000px;
+        }
+        .icon-toggle {
+            transition: transform 0.3s ease-in-out;
+        }
+        .open .icon-toggle {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center">
+        <div id="hero-bg" class="hero-bg" style="background-image: url('https://images.pexels.com/photos/37403/bora-bora-french-polynesia-sunset-ocean.jpg?cs=srgb&dl=pexels-pixabay-37403.jpg&fm=jpg');"></div>
+        <div class="container mx-auto px-4 z-10 flex flex-col items-center">
+            <h1 class="hero-title text-5xl md:text-7xl font-bold leading-tight mb-4">The Seven Wonders of the Modern World</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300">An immersive journey to the most spectacular architectural marvels of our time.</p>
+        </div>
+        <a href="#explore-section" class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main id="explore-section">
+        <!-- Feature 1: The Great Wall of China -->
+        <section class="wonder-section">
+            <div class="image-pane">
+                <div class="image-pane-inner">
+                    <img src="https://cdn.britannica.com/89/179589-138-3EE27C94/Overview-Great-Wall-of-China.jpg?w=800&h=450&c=crop" alt="The Great Wall of China">
+                </div>
+            </div>
+            <div class="content-pane">
+                <div class="wonder-trigger cursor-pointer flex justify-between items-center">
+                    <h2 class="text-5xl font-bold hero-title">The Great Wall of China</h2>
+                    <svg class="w-8 h-8 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="details-content open"> <!-- Initially open -->
+                    <div class="space-y-8 pt-6">
+                        <div><h3 class="text-2xl font-semibold text-white">History</h3><p class="text-gray-400 leading-relaxed mt-2">Built from the 7th century BC onwards, this series of fortifications was designed to protect Chinese states against nomadic raids. It's a testament to centuries of engineering and perseverance.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white">Best Time to Visit</h3><p class="text-gray-400 leading-relaxed mt-2">Spring (April-May) and autumn (September-November) offer pleasant weather and stunning views.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white mb-3">Location</h3><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d278431.0885806209!2d116.546359976861!3d40.43190779410119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35f121d7687f2ccf%3A0x3631181f25170034!2sGreat%20Wall%20of%20China!5e0!3m2!1sen!2sin!4v1690278983153!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 2: The Colosseum -->
+        <section class="wonder-section">
+            <div class="image-pane">
+                <div class="image-pane-inner">
+                    <img src="https://cdn.britannica.com/36/162636-050-932C5D49/Colosseum-Rome-Italy.jpg" alt="The Colosseum">
+                </div>
+            </div>
+            <div class="content-pane">
+                <div class="wonder-trigger cursor-pointer flex justify-between items-center">
+                    <h2 class="text-5xl font-bold hero-title">The Colosseum</h2>
+                    <svg class="w-8 h-8 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="details-content">
+                    <div class="space-y-8 pt-6">
+                        <div><h3 class="text-2xl font-semibold text-white">History</h3><p class="text-gray-400 leading-relaxed mt-2">Completed in AD 80, this grand amphitheater hosted epic gladiatorial contests and public spectacles, symbolizing the power and drama of Imperial Rome.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white">Best Time to Visit</h3><p class="text-gray-400 leading-relaxed mt-2">Visit during shoulder seasons (April-June, Sept-Oct) to avoid extreme heat and crowds.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white mb-3">Location</h3><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.333313803875!2d12.4900542154284!3d41.89021017922113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61b6532013ad%3A0x28f1c82e90850300!2sColosseum!5e0!3m2!1sen!2sin!4v1690279149865!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 3: Christ the Redeemer -->
+        <section class="wonder-section">
+            <div class="image-pane">
+                <div class="image-pane-inner">
+                    <img src="https://cdn.britannica.com/54/150754-050-5B93A950/statue-Christ-the-Redeemer-Rio-de-Janeiro.jpg" alt="Christ the Redeemer">
+                </div>
+            </div>
+            <div class="content-pane">
+                 <div class="wonder-trigger cursor-pointer flex justify-between items-center">
+                    <h2 class="text-5xl font-bold hero-title">Christ the Redeemer</h2>
+                    <svg class="w-8 h-8 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="details-content">
+                    <div class="space-y-8 pt-6">
+                        <div><h3 class="text-2xl font-semibold text-white">History</h3><p class="text-gray-400 leading-relaxed mt-2">An icon of Art Deco, this colossal statue of Jesus Christ was completed in 1931, watching over Rio de Janeiro from the summit of Corcovado Mountain as a symbol of peace.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white">Best Time to Visit</h3><p class="text-gray-400 leading-relaxed mt-2">The dry season from December to March offers the clearest views and best weather for photos.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white mb-3">Location</h3><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.998319951427!2d-43.2127777850343!3d-22.95191688500239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997a5975b386e5%3A0x4cb7e249113a895!2sChrist%20the%20Redeemer!5e0!3m2!1sen!2sin!4v1690279212351!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 4: Chichen Itza -->
+        <section class="wonder-section">
+            <div class="image-pane">
+                <div class="image-pane-inner">
+                    <img src="https://images.pexels.com/photos/5869131/pexels-photo-5869131.jpeg?cs=srgb&dl=pexels-jose-andres-pacheco-cortes-3641213-5869131.jpg&fm=jpg" alt="Chichen Itza">
+                </div>
+            </div>
+            <div class="content-pane">
+                 <div class="wonder-trigger cursor-pointer flex justify-between items-center">
+                    <h2 class="text-5xl font-bold hero-title">Chichen Itza</h2>
+                    <svg class="w-8 h-8 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="details-content">
+                    <div class="space-y-8 pt-6">
+                        <div><h3 class="text-2xl font-semibold text-white">History</h3><p class="text-gray-400 leading-relaxed mt-2">This ancient Mayan city thrived from around 600 A.D. to the 1200s. The massive step-pyramid, El Castillo, demonstrates the Mayans' advanced astronomical skills.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white">Best Time to Visit</h3><p class="text-gray-400 leading-relaxed mt-2">The dry season from November to April is ideal. Visit early in the morning to avoid crowds.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white mb-3">Location</h3><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3734.549238321047!2d-88.5700994850744!3d20.68428498622956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85f1304402613e79%3A0xc977a6411f78634a!2sChichen%20Itza!5e0!3m2!1sen!2sin!4v1690279264353!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 5: Petra -->
+        <section class="wonder-section">
+            <div class="image-pane">
+                <div class="image-pane-inner">
+                    <img src="https://cdn.britannica.com/88/189788-050-9B5DB3A4/Al-Dayr-Petra-Jordan.jpg" alt="Petra">
+                </div>
+            </div>
+            <div class="content-pane">
+                 <div class="wonder-trigger cursor-pointer flex justify-between items-center">
+                    <h2 class="text-5xl font-bold hero-title">Petra</h2>
+                    <svg class="w-8 h-8 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="details-content">
+                    <div class="space-y-8 pt-6">
+                        <div><h3 class="text-2xl font-semibold text-white">History</h3><p class="text-gray-400 leading-relaxed mt-2">The capital of the Nabataean Kingdom, dating to around 300 B.C. Petra is famous for its rock-cut architecture and water conduit system, earning it the nickname "Rose City".</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white">Best Time to Visit</h3><p class="text-gray-400 leading-relaxed mt-2">Spring (March-May) and autumn (September-November) offer the most pleasant weather for exploring.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white mb-3">Location</h3><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.664593455114!2d35.4421529151144!3d30.32849648178338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x154a110f015978af%3A0x5871f357591e6a4c!2sPetra!5e0!3m2!1sen!2sin!4v1690279313435!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 6: Taj Mahal -->
+        <section class="wonder-section">
+            <div class="image-pane">
+                <div class="image-pane-inner">
+                    <img src="https://c.ndtvimg.com/2025-05/601640bo_taj-mahal_625x300_21_May_25.jpg?im=FeatureCrop,algorithm=dnn,width=1200,height=738" alt="Taj Mahal">
+                </div>
+            </div>
+            <div class="content-pane">
+                 <div class="wonder-trigger cursor-pointer flex justify-between items-center">
+                    <h2 class="text-5xl font-bold hero-title">Taj Mahal</h2>
+                    <svg class="w-8 h-8 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="details-content">
+                    <div class="space-y-8 pt-6">
+                        <div><h3 class="text-2xl font-semibold text-white">History</h3><p class="text-gray-400 leading-relaxed mt-2">Commissioned in 1632 by Mughal emperor Shah Jahan for his wife Mumtaz Mahal, this ivory-white marble mausoleum is a timeless symbol of love and a jewel of Muslim art in India.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white">Best Time to Visit</h3><p class="text-gray-400 leading-relaxed mt-2">October to March provides cool, pleasant weather. It is closed on Fridays.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white mb-3">Location</h3><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.421479803135!2d78.0395658150505!3d27.17514478301527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1690279360212!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 7: Machu Picchu -->
+        <section class="wonder-section">
+            <div class="image-pane">
+                <div class="image-pane-inner">
+                    <img src="https://images.unsplash.com/photo-1526749837599-b4eba9fd855e?q=80&w=2070&auto=format&fit=crop" alt="Machu Picchu">
+                </div>
+            </div>
+            <div class="content-pane">
+                 <div class="wonder-trigger cursor-pointer flex justify-between items-center">
+                    <h2 class="text-5xl font-bold hero-title">Machu Picchu</h2>
+                    <svg class="w-8 h-8 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="details-content">
+                    <div class="space-y-8 pt-6">
+                        <div><h3 class="text-2xl font-semibold text-white">History</h3><p class="text-gray-400 leading-relaxed mt-2">This Incan citadel, built in the 15th century, is renowned for its sophisticated dry-stone walls. It was abandoned a century later and remained unknown to the outside world until 1911.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white">Best Time to Visit</h3><p class="text-gray-400 leading-relaxed mt-2">The dry season from April to October is the best time for clear skies and hiking.</p></div>
+                        <div><h3 class="text-2xl font-semibold text-white mb-3">Location</h3><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3883.333038847051!2d-72.54718248517468!3d-13.16314119066194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916d9a5f8092337d%3A0x53c36965545a278!2sMachu%20Picchu!5e0!3m2!1sen!2sin!4v1690279402517!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-center py-6">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2024 Wonders of the World. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">An immersive experience crafted with code.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Accordion functionality
+            const triggers = document.querySelectorAll('.wonder-trigger');
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const content = trigger.nextElementSibling;
+                    trigger.classList.toggle('open');
+                    content.classList.toggle('open');
+                });
+            });
+
+            // Hero image slider
+            const heroImages = [
+                'https://images.pexels.com/photos/37403/bora-bora-french-polynesia-sunset-ocean.jpg?cs=srgb&dl=pexels-pixabay-37403.jpg&fm=jpg',
+                'https://cdn.britannica.com/89/179589-138-3EE27C94/Overview-Great-Wall-of-China.jpg?w=800&h=450&c=crop',
+                'https://cdn.britannica.com/36/162636-050-932C5D49/Colosseum-Rome-Italy.jpg',
+                'https://cdn.britannica.com/54/150754-050-5B93A950/statue-Christ-the-Redeemer-Rio-de-Janeiro.jpg',
+                'https://images.pexels.com/photos/5869131/pexels-photo-5869131.jpeg?cs=srgb&dl=pexels-jose-andres-pacheco-cortes-3641213-5869131.jpg&fm=jpg',
+                'https://cdn.britannica.com/88/189788-050-9B5DB3A4/Al-Dayr-Petra-Jordan.jpg',
+                'https://c.ndtvimg.com/2025-05/601640bo_taj-mahal_625x300_21_May_25.jpg?im=FeatureCrop,algorithm=dnn,width=1200,height=738',
+                'https://images.unsplash.com/photo-1526749837599-b4eba9fd855e?q=80&w=2070&auto=format&fit=crop'
+            ];
+            let currentImageIndex = 0;
+            const heroBg = document.getElementById('hero-bg');
+
+            if (heroBg) {
+                setInterval(() => {
+                    currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+                    heroBg.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+                }, 5000);
+            }
+        });
+    </script>
+
+</body>
+</html>
